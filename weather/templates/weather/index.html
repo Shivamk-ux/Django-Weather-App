@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django Weather App</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+   </head>
+<body>
+
+    <h1>🌤️ Django Weather App</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="city" placeholder="Enter city name" required>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    {% if weather_data %}
+        <div class="card">
+            {% if weather_data.error %}
+                <p class="error">{{ weather_data.error }}</p>
+            {% else %}
+                <h2>
+                  <img class="flag" src="https://flagsapi.com/{{ weather_data.country }}/shiny/32.png" alt="flag">
+                    {{ weather_data.city }}, {{ weather_data.country }}
+                </h2>
+
+                <img class="icon" src="https://openweathermap.org/img/wn/{{ weather_data.icon }}@2x.png" alt="weather icon">
+
+                <p><strong>Temperature:</strong> {{ weather_data.temperature }}°C</p>
+                <p><strong>Description:</strong> {{ weather_data.description }}</p>
+                <p><strong>Humidity:</strong> {{ weather_data.humidity }}%</p>
+                <p><strong>Wind Speed:</strong> {{ weather_data.wind_speed }} m/s</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</body>
+</html>
