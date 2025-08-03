@@ -6,7 +6,7 @@ def index(request):
 
     if request.method == 'POST':
         city = request.POST.get('city')
-        api_key = 'c5026e14d791ac29ea0dbee2ee853db0'
+        api_key = 'your api key'
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
 
         response = requests.get(url)
